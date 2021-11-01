@@ -1,0 +1,6 @@
+app/__pycache__/
+app/bin/
+app/lib/
+app/pyvenv.cfg
+app/__init__.pyc
+.DS_Store
