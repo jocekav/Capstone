@@ -1,12 +1,14 @@
 import requests
 import json
+from flask import Blueprint, render_template, request, redirect, url_for
 
 ##server side
 CLIENT_ID = "64d88f30bd6e47d5a99e11985fdd0bdb"
 CLIENT_SECRET = "aa57afecfba4466bb0caeae430352b4c"
 PORT = "5000"
 CLIENT_URL = "http://127.0.0.1"
-REDIRECT_URI = "{}:{}/player/".format(CLIENT_URL, PORT)
+REDIRECT_URI = "{}:{}/profile".format(CLIENT_URL, PORT)
+# REDIRECT_URI = "http://127.0.0.1:5000/"
 SCOPE = "user-modify-playback-state user-read-recently-played streaming user-read-currently-playing user-read-playback-state user-read-email user-read-private"
 TOKEN_DATA = []
 

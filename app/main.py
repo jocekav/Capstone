@@ -17,7 +17,7 @@ def index():
 
 #profile page
 @main.route('/profile', methods=['GET', 'POST'])
-@login_required
+# @login_required
 def profile():
     form = UpdateProfileForm()
     if form.validate_on_submit():

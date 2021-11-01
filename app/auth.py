@@ -3,8 +3,14 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from models import User
 from flask_login import login_user, logout_user, login_required, current_user
 from __init__ import db
+from spotifyLogin import getAuth
 
 auth = Blueprint('auth', __name__)
+
+@auth.route("/callback/")
+def callback():
+    print('spotify')
+    return redirect(getAuth())
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -32,7 +38,8 @@ def login():
         # if the above check passes, then we know the user has the 
         # right credentials
         login_user(user, remember=remember)
-        return redirect(url_for('main.profile'))
+        return redirect(getAuth())
+        # return redirect(url_for('main.profile'))
 
 @auth.route('/signup', methods=['GET', 'POST'])
 def signup():
