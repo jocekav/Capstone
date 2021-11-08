@@ -3,6 +3,7 @@ from __init__ import db
 from __init__ import create_app
 from forms import UpdateProfileForm
 from flask_login import login_user, logout_user, login_required, current_user
+import spotifyLogin
 
 import os
 import uuid
@@ -17,12 +18,17 @@ def index():
 
 #profile page
 @main.route('/profile', methods=['GET', 'POST'])
-# @login_required
+@login_required
 def profile():
     form = UpdateProfileForm()
+    # if 'code' in request.args:
+    #         global token
+    #         print(request.args['code'])
+    #         userToken = spotifyLogin.getUserToken(request.args['code'])
+    #         token = {'userToken': userToken[0]}
+    #         print(token)
     if form.validate_on_submit():
         if form.picture.data:
-            print(form.picture.data)
             f = form.picture.data
             image_id = str(uuid.uuid4())
             file_name = image_id + '.png'
