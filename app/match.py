@@ -5,17 +5,24 @@ from flask_login import login_user, logout_user, login_required, current_user
 from __init__ import db
 
 match = Blueprint('match', __name__)
+global user_count
+user_count = 0
 
 @match.route('/matches', methods=['GET', 'POST'])
 def matches():
-    user_count = 0
+    global user_count
     users = User.query.all()
+    total_users = len(users)
+    print(total_users)
     # if request.method == 'GET':
     name = users[user_count].name
     location = users[user_count].location
     preference = users[user_count].preference
     age = users[user_count].age
     picture = users[user_count].image_file
+    picture = 'static/' + picture
+    user_count = (user_count + 1) % total_users
+    print(user_count)
     return render_template('match.html', name=name, location=location, preference=preference, age=age, image_file=picture)
     # else:
     #     # if the request is POST the we check if the user exist 

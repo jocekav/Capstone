@@ -22,16 +22,21 @@
   </head> -->
 {% block content %}
   <section class="u-align-center u-clearfix u-image u-section-1" id="carousel_0532" data-image-width="1624" data-image-height="1080">
+    <img src="{{ image_file }}">
     <div class="u-align-left u-clearfix u-sheet u-valign-middle u-sheet-1">
       <div class="u-align-center u-container-style u-group u-white u-group-1" data-href="https://nicepage.com">
         <div class="u-container-layout u-valign-middle u-container-layout-1">
-          <div class="u-image u-image-circle u-preserve-proportions u-image-1" alt="" data-image-width="598" data-image-height="598"></div>
+          <div class="u-image u-image-circle u-preserve-proportions u-image-1"data-image-width="598" data-image-height="598"></div>
           <h2 class="u-custom-font u-font-courier-new u-text u-text-default u-text-1">{{ name }}<br>
           </h2>
           <p class="u-text u-text-grey-50 u-text-2">Location: {{ location }} <br> Preference: {{ preference }} <br> Age: {{ age }}</p>
-          <a href="https://nicepage.app" class="u-active-black u-border-none u-btn u-btn-round u-button-style u-hover-black u-palette-3-base u-radius-2 u-text-active-white u-text-hover-white u-btn-2">Next Match</a>
+          <!-- <a href="https://nicepage.app" class="u-active-black u-border-none u-btn u-btn-round u-button-style u-hover-black u-palette-3-base u-radius-2 u-text-active-white u-text-hover-white u-btn-2">Next Match</a> -->
         </div>
       </div>
+      <form action="/matches" method="post">
+        <button type= "submit" class="button is-block is-info is-large is-fullwidth">Next Match</button>
+    </form>
+      <!-- <button href="{{ url_for('match.matches')}}" class="button is-block is-info is-large is-fullwidth">Next Match</button> -->
     </div>
   </section>
 {% endblock %}
