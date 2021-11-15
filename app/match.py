@@ -24,27 +24,11 @@ def matches():
     user_count = (user_count + 1) % total_users
     print(user_count)
     return render_template('match.html', name=name, location=location, preference=preference, age=age, image_file=picture)
-    # else:
-    #     # if the request is POST the we check if the user exist 
-    #       # and with te right password
-    #     email = request.form.get('email')
-    #     password = request.form.get('password')
-    #     remember = True if request.form.get('remember') else False
-    #     user = User.query.filter_by(email=email).first()
-    #     # check if the user actually exists
-    #     # take the user-supplied password, hash it, and compare it     
-    #     # to the hashed password in the database
-    #     if not user:
-    #         # flash('Please sign up before!')
-    #         print('Please sign up before!')
-    #         return redirect(url_for('auth.signup'))
-    #     elif not check_password_hash(user.password, password):
-    #         # flash('Please check your login details and try again.')
-    #         print('Please check your login details and try again.')
-    #         return redirect(url_for('auth.login')) # if the user 
-    #            #doesn't exist or password is wrong, reload the page
-    #     # if the above check passes, then we know the user has the 
-    #     # right credentials
-    #     login_user(user, remember=remember)
-    #     return redirect(getAuth())
-    #     # return redirect(url_for('main.profile'))
+
+@match.route('/player', methods=['GET', 'POST'])
+def player():
+    global user_count
+    users = User.query.all()
+    name = users[user_count].name
+    spotify_uri = 'https://open.spotify.com/embed/playlist/4hAJBSW2653wWwxES5F50F?utm_source=generator'
+    return render_template('player.html', spotify_uri=spotify_uri, name=name)

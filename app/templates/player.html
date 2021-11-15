@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Your Shared Playlist with {{name}}</h1>
+<iframe src="{{spotify_uri}}" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+{% endblock %}
