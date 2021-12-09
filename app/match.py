@@ -15,6 +15,8 @@ def matches():
     total_users = len(users)
     print(total_users)
     # if request.method == 'GET':
+    if current_user.id == user_count + 1:
+        user_count = (user_count + 1) % total_users
     name = users[user_count].name
     location = users[user_count].location
     preference = users[user_count].preference

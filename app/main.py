@@ -22,13 +22,13 @@ def index():
 def profile():
     form = UpdateProfileForm()
     if 'code' in request.args:
-            global token
-            print(request.args['code'])
             userToken = spotifyLogin.getUserToken(request.args['code'])
             token = userToken[0]
             current_user.token = token
+            spotify_id = spotifyLogin.getUserID(token)
+            print(spotify_id)
+            current_user.spotify_id = spotify_id
             db.session.commit()
-            print(token)
     if form.validate_on_submit():
         if form.picture.data:
             f = form.picture.data

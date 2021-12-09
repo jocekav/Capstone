@@ -11,3 +11,4 @@ class User(UserMixin, db.Model):
     age = db.Column(db.String(1000))
     image_file = db.Column(db.String(20), default='default.jpg')
     token = db.Column(db.String(1000))
+    spotify_id = db.Column(db.String(1000))

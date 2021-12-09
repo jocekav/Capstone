@@ -59,3 +59,12 @@ def handleToken(response):
 
 def getAccessToken():
     return TOKEN_DATA
+
+def getUserID(token):
+    url = "https://api.spotify.com/v1/me"
+    headers = {"Authorization": 'Bearer {token}'.format(token=token),
+                "Content-Type": "application/json"}
+    resp = requests.get(url, headers=headers)
+    resp = resp.json()
+    return resp['id']
+    
