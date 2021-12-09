@@ -30,5 +30,5 @@ def player():
     global user_count
     users = User.query.all()
     name = users[user_count].name
-    spotify_uri = 'https://open.spotify.com/embed/playlist/4hAJBSW2653wWwxES5F50F?utm_source=generator'
-    return render_template('player.html', spotify_uri=spotify_uri, name=name)
+    # spotify_uri = 'https://open.spotify.com/embed/playlist/4hAJBSW2653wWwxES5F50F?utm_source=generator'
+    return render_template('player.html', token=current_user.token, name=name)
