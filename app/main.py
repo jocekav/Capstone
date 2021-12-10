@@ -1,9 +1,11 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, jsonify, render_template, request, redirect, url_for
 from __init__ import db
 from __init__ import create_app
 from forms import UpdateProfileForm
 from flask_login import login_user, logout_user, login_required, current_user
 import spotifyLogin
+import playlist
+import numpy as np
 
 import os
 import uuid
@@ -26,7 +28,6 @@ def profile():
             token = userToken[0]
             current_user.token = token
             spotify_id = spotifyLogin.getUserID(token)
-            print(spotify_id)
             current_user.spotify_id = spotify_id
             db.session.commit()
     if form.validate_on_submit():
@@ -54,6 +55,35 @@ def profile():
     return render_template('profile.html',
                            image_file=image_file, form=form, name=current_user.name)
     # return render_template('profile.html', name=current_user.name)
+
+@main.route('/load_spotify_data')
+def load_spotify_data():
+    print('button push')
+    token = current_user.token
+    user_id = current_user.spotify_id
+    playlists = playlist.getPlaylists(user_id, token)
+    songs = playlist.getSongInLists(playlists, token)
+    artists = playlist.getArtistInLists(playlists, token)
+    genres = playlist.getArtistGenre(artists, token)
+
+    path = os.path.join(app.root_path, 'txt/')
+    playlist_fn = str(uuid.uuid4()) + '_playlists.txt'
+    songs_fn = str(uuid.uuid4()) + '_songs.txt'
+    artists_fn = str(uuid.uuid4()) + '_artists.txt'
+    genre_fn = str(uuid.uuid4()) + '_genre.txt'
+    np.savetxt((path + playlist_fn), playlists, delimiter=" ", fmt="%s")
+    np.savetxt((path + songs_fn), songs, delimiter=" ", fmt="%s")
+    np.savetxt((path + artists_fn), artists, delimiter=" ", fmt="%s")
+    np.savetxt((path + genre_fn), genres, delimiter=" ", fmt="%s")
+    
+    current_user.playlists = playlist_fn
+    current_user.songs = songs_fn
+    current_user.artists = artists_fn
+    current_user.genres = genre_fn
+
+    db.session.commit()
+    print('data recieved')
+    return jsonify(status='Spotify Data Recieved')
 
 
 #init flask app

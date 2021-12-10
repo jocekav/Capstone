@@ -12,3 +12,8 @@ class User(UserMixin, db.Model):
     image_file = db.Column(db.String(20), default='default.jpg')
     token = db.Column(db.String(1000))
     spotify_id = db.Column(db.String(1000))
+    playlists = db.Column(db.String(20))
+    songs = db.Column(db.String(20))
+    artists = db.Column(db.String(20))
+    genres = db.Column(db.String(20))
+    

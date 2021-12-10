@@ -9,7 +9,7 @@ PORT = "5000"
 CLIENT_URL = "http://127.0.0.1"
 REDIRECT_URI = "{}:{}/profile".format(CLIENT_URL, PORT)
 # REDIRECT_URI = "http://127.0.0.1:5000/"
-SCOPE = "user-modify-playback-state user-read-recently-played streaming user-read-currently-playing user-read-playback-state user-read-email user-read-private"
+SCOPE = "user-modify-playback-state user-read-recently-played streaming user-read-currently-playing user-read-playback-state user-read-email user-read-private playlist-modify-public"
 TOKEN_DATA = []
 
 ##spotify parameters

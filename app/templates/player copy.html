@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HeartBeats: Joint Playlist</title>
+</head>
+<body>
+    <h1>Your Playlist with {{ name }}</h1>
+    <ol id="queue" role="list" class="w-list-unstyled">
+        <li id="queue1"></li>
+        <li id="queue2"></li>
+        <li id="queue3"></li>
+        <li id="queue4"></li>
+        <li id="queue5"></li>
+    </ol>
+    <iframe id="embed" src="{{ link }}" utm_source=generator width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe> -->
+    <button id="previous">Back</button>
+    <button id="togglePlay">Play</button>
+    <button id="next">Forward</button>
+
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        const token = '{{token}}'
+        const user_id = '{{user_id}}'
+        const other_user = '{{name}}'
+        const uris = '{{ uris |tojson }}'
+        let player
+        let id
+        let track_count
+        var playlist_id = 'init'
+        window.onSpotifyWebPlaybackSDKReady = () => {
+            player = new Spotify.Player({
+                name: 'Web Playback SDK Quick Start Player',
+                getOAuthToken: cb => { cb(token); },
+                volume: 0.5
+            });
+
+            // Ready
+            player.addListener('ready', ({ device_id }) => {
+                id = device_id
+                console.log('Ready with Device ID', device_id);
+                set_device()
+                console.log(uris)
+                create_playlist()
+                // add_to_playlist('{{uris}}')
+            });
+
+            // Not Ready
+            player.addListener('not_ready', ({ device_id }) => {
+                console.log('Device ID has gone offline', device_id);
+            });
+
+            player.addListener('initialization_error', ({ message }) => {
+                console.error(message);
+            });
+
+            player.addListener('authentication_error', ({ message }) => {
+                console.error(message);
+            });
+
+            player.addListener('account_error', ({ message }) => {
+                console.error(message);
+            });
+
+            document.getElementById('togglePlay').onclick = function() {
+              player.togglePlay();
+              console.log('play')
+            //   play()
+            };
+
+            player.connect().then(success => {
+            if (success) {
+                console.log('The Web Playback SDK successfully connected to Spotify!');
+            }
+            });
+
+            document.getElementById('previous').onclick = function() {
+                player.previousTrack()
+                console.log('Set to previous track!');
+            };
+
+            document.getElementById('next').onclick = function() {
+                player.nextTrack()
+                console.log('Set to next track!');
+            };
+
+        }
+        // const play = ({
+        //     // spotify_uri,
+        //     // playerInstance: {
+        //     //     _options: {
+        //     //     getOAuthToken
+        //     //     }
+        //     // }
+        // }) => {
+        // getOAuthToken(token => {
+        //     fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
+        //     method: 'PUT',
+        //     body: JSON.stringify({ uris: 'spotify:track:7xGfFoTpQ2E7fRF5lN10tr' }),
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Authorization': `Bearer ${token}`
+        //     },
+        //     });
+        // });
+        // };
+        
+        function play() {
+            console.log(token)
+            console.log(id)
+            $.ajax({
+                url: "https://api.spotify.com/v1/me/player/play?device_id=" + id,
+                type: "PUT",
+                data: '{"uris": ["spotify:track:5ya2gsaIhTkAuWYEMB0nw5"]}',
+                beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + token );},
+                success: function(data) { 
+                    console.log(data)
+                }, error: function(data) { 
+                    console.log(data)
+                } 
+            });
+        }
+
+        function set_device() {
+            $.ajax({
+                url: "https://api.spotify.com/v1/me/player",
+                type: "PUT",
+                data: '{"device_ids": ["' + id + '"]}',
+                beforeSend: function(xhr){
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + token );
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                },
+                success: function(){ 
+                    console.log("connected")
+                }, error: function(data) { 
+                    console.log(data)
+                }
+            });
+        }
+
+        function create_playlist() {
+            $.ajax({
+                url: "https://api.spotify.com/v1/users/" + user_id + "/playlists",
+                type: "POST",
+                data: '{"name": "HeartBeats Playlist with ' + other_user + '", "description": "HeartBeats Playlist with' + other_user + '"}',
+                beforeSend: function(xhr){
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + token );
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                },
+                success: function(data){ 
+                    save_playlist_id(data)
+                    add_to_playlist(data.id, uris)
+                    console.log(playlist_id)
+                    load_playlist(playlist_id)
+                }, error: function(data) { 
+                    console.log(data)
+                }
+            });
+        }
+
+        function save_playlist_id(response) {
+            playlist_id = response.id
+            console.log(playlist_id)
+        }
+
+        function add_to_playlist(playlist_id, uris) {
+            $.ajax({
+                url: "https://api.spotify.com/v1/playlists/" + playlist_id + "/tracks",
+                type: "POST",
+                data: '{"uris": ' + uris + '}',
+                beforeSend: function(xhr){
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + token );
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                },
+                success: function(){ 
+                    console.log("added")
+                }, error: function(data) { 
+                    console.log(data)
+                } 
+            });
+        }
+
+        function load_playlist(playlist_id) {
+            document.getElementById("embed").src="https://open.spotify.com/embed/playlist/" + playlist_id + '?'
+            console.log("updated")
+        }
+
+    </script>
+</body>
+</html>{% endblock %}
