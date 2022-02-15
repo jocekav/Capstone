@@ -18,7 +18,7 @@ itsdangerous==2.0.1
 Jinja2==3.0.1
 Mako==1.1.6
 MarkupSafe==2.0.1
-numpy==1.21.4
+numpy==1.22.2
 Pillow==8.4.0
 pipenv==2022.1.8
 platformdirs==2.4.1
