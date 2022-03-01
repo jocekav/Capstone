@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        /* body {background-color: #D7D9D7;} */
+        body {
+            background: linear-gradient(to top, #D7D9D7 0%, #FFFFFF 73.58%);
+            background-repeat: no-repeat;
+            background-attachment: fixed;}
+        input[type=text] {
+            width: 70%;
+            /* padding: 4px 20px; */
+            margin: 10px 0px;
+            box-sizing: border-box;
+            border: none;
+            border-bottom: 1px solid black;
+            outline: none;
+            text-align: right;
+        }
+        form { 
+            width: 600px;
+            transform:translate(-10%,-25%);
+        }
+        label {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            text-align: left;
+            font-weight: bold;
+            font-family: arial, sans-serif;
+            /* width: 170px; */
+            /* margin-right: 10px; */
+        }
+        .link-button {
+            background: none!important;
+            border: none;
+            padding: 15px, 10px;
+            margin: 5px;
+            /*optional*/
+            font-family: arial, sans-serif;
+            font-size: 1.25rem;
+            /*input has OS specific font-family*/
+            color: #C60F7B;
+            cursor: pointer;
+            display: inline;
+            top: 50%;
+            left: 50%;
+            transform:translate(100%,70%);
+        } 
+        .submit-button {
+            background-color: #218380;
+            border-radius: 60px;
+            border: none;
+            font-size: 1.25rem;
+            color: white;  
+            min-width: 150px;
+            min-height: 60px;
+            display: block;
+            margin: 15% 48%;
+        }
+        img {
+            transform:translate(-50%,-50%);
+            border-radius: 50%; 
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+    <div style = "position: absolute;
+    width: 600px;
+    height: 400px;
+    left: 50%;
+    top: 50%;
+    transform:translate(-50%,-50%);
+    
+    background: #FFFFFF;
+    box-shadow: 0px 0px 8px 6px rgba(31, 30, 33, 0.25);"
+    >
+    <!-- <div>
+        <button class="link-button" id='load_spotify' onclick=load_spotify()>Load Spotify Data</button>
+        <button class="link-button" id='reset_pass'>Reset Password</button>
+    </div> -->
+        <img src="../static/156f5edb-bf97-484e-9d81-9c88ccf13137.png">
+        <form method="POST" action="/signup">
+            <div class="field">
+                <div class="control">
+                    <label name> Name
+                    <input class="input is-large" type="text" name="name" placeholder="Jocelyn Kavanagh">
+                    </label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <label email> Email
+                    <input class="input is-large" type="text" name="email" placeholder="jkavanagh3@gatech.edu">
+                    </label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <label location> Location
+                    <input class="input is-large" type="text" name="location" placeholder="Atlanta, GA">
+                    </label>
+                </div>
+            </div>
+            <button class="link-button" id='load_spotify' onclick=load_spotify()>Load Spotify Data</button>
+            <button class="link-button" id='reset_pass'>Reset Password</button>
+            <button class="submit-button" id="submit">Save Profile</button>
+        </form>
+    </div>
+</html>
+
+
+
+<!-- <div class="field">
+    <div class="control">
+        <tr>
+        <td><label> Name </label></td>
+        <td><input class="input is-large" type="text" name="name" placeholder="Jocelyn Kavanagh" autofocus=""></td>
+        </tr>
+    </div>
+</div>
+<div class="field">
+    <div class="control">
+        <tr>
+        <td><label> Email </label></td>
+        <td><input class="input is-large" type="text" name="email" placeholder="jkavanagh3@gatech.edu" autofocus=""></td>
+        </tr>
+    </div>
+</div>
+<div class="field">
+    <div class="control">
+        <tr>
+            <td><label> Location </label></td>
+            <td><input class="input is-large" type="text" name="location" placeholder="Atlanta, GA" autofocus=""></td>
+        </tr>
+    </div>
+</div> -->
