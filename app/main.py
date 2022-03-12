@@ -53,7 +53,7 @@ def profile():
         form.age.data = current_user.age
     image_file = url_for('static', filename= current_user.image_file)
     return render_template('profile.html',
-                           image_file=image_file, form=form, name=current_user.name)
+                           image_file=image_file, form=form, name=current_user.name, location=current_user.location, preference=current_user.preference, age=current_user.age)
     # return render_template('profile.html', name=current_user.name)
 
 @main.route('/load_spotify_data')
