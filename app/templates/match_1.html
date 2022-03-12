@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        /* body {background-color: #D7D9D7;} */
+        body {
+            background: linear-gradient(to top, #D7D9D7 0%, #FFFFFF 73.58%);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            height: 100vh;
+        }
+        .link-button {
+            background: none!important;
+            border: none;
+            padding: 15px, 10px;
+            margin: 5px;
+            /*optional*/
+            font-family: arial, sans-serif;
+            font-size: 1.25rem;
+            /*input has OS specific font-family*/
+            color: #C60F7B;
+            cursor: pointer;
+            display: inline;
+            top: 50%;
+            left: 50%;
+            transform:translate(100%,70%);
+        } 
+        .submit-button {
+            background-color: #218380;
+            border-radius: 60px;
+            border: none;
+            font-size: 1.25rem;
+            color: white;  
+            width: 150px;
+            height: 60px;
+            /* display: block; */
+            /* margin: 28% 40%; */
+        }
+        img {
+            position: absolute;
+            border-radius: 50%; 
+            width: 200px;
+            height: 200px;
+            top: 25%;
+            left: 15%;
+        }
+        .card {
+            position:relative;
+            width:600px;
+            height:400px;
+            top: 25%;
+            left: 30%;
+            background: #FFFFFF;
+            box-shadow: 0px 0px 8px 6px rgba(31, 30, 33, 0.25);
+            margin: 0;
+        }
+        .submit-button-class {
+            position: absolute;
+            top: 93%;
+            left: 37%;
+            width: 150px;
+            height: 60px;
+        }
+        .profile-circles-class {
+            position: absolute;
+            top: 0;
+            left:-15%;
+            height: 400px;
+            width: 400px;
+        }
+        .pink-circle {
+            position: absolute;
+            border-radius: 50%; 
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            background-color: #C60F7B;
+        }
+        .purple-circle {
+            position: absolute;
+            border-radius: 50%; 
+            width: 200px;
+            height: 200px;
+            top: 40%;
+            background-color: #18206F;
+        }
+        .match-text {
+            position: absolute;
+            font-family: arial, sans-serif;
+            font-size: 1.5rem;
+            width:600px;
+            height:400px;
+        }
+        .match-name {
+            position: absolute;
+            max-width: 400px;
+            right:0;
+            margin-right: 50px;
+            margin-top: 40px;
+            font-size: 2rem;
+        }
+        .match-score {
+            position: absolute;
+            max-width: 400px;
+            right:0;
+            top: 13%;
+            margin-right: 50px;
+            margin-top: 30px;
+            font-size: 1.4rem;
+            color: #218380;
+        }
+        .match-songs {
+            position: absolute;
+            max-width: 400px;
+            right:0;
+            top: 30%;
+            margin-right: 50px;
+            margin-top: 30px;
+            font-size: 1.4rem;
+        }
+        .match-info {
+            position: absolute;
+            max-width: 400px;
+            right:0;
+            top: 35%;
+            text-align: right;
+            margin-right: 50px;
+            margin-top: 30px;
+            font-size: 1.4rem;
+        }
+        .match-location {
+            position: absolute;
+            max-width: 400px;
+            right:0;
+            top: 75%;
+            margin-right: 50px;
+            margin-top: 30px;
+            font-size: 1.4rem;
+        }
+        .arrow {
+            position: relative;
+            width:66px;
+            height:160px;
+            top: -10%;
+            left: 85%;
+        }
+        
+
+    </style>
+    <div class = card>
+        <div class = "submit-button-class">
+            <button class="submit-button" id="submit">Match!</button>
+        </div>
+        <div class="profile-circles-class">
+            <div class = "pink-circle"></div>
+            <div class = "purple-circle"></div>
+            <img src="../static/156f5edb-bf97-484e-9d81-9c88ccf13137.png">
+        </div>
+        <div class = "match-text">
+            <div class = "match-name"><b>Jocelyn Kavanagh</b></div>
+            <div class = "match-score"><b>Match Score: 20%</b></div>
+            <div class = "match-info">
+                "Golden Slumber" by The Beatles</br>
+                “Superstition” by Stevie Wonder</br>
+                “Stupid Love” by Lady Gaga</br>
+            </div>
+            <div class = "match-location">Atlanta, GA</div>
+        </div>       
+    </div>
+    <div class="arrow">
+    <svg width="66" height="160" viewBox="0 0 66 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M63.4789 74.5637C65.6212 77.8713 65.6212 82.1287 63.4789 85.4363L18.6432 154.659C13.2272 163.021 0.249996 159.186 0.249996 149.223L0.249996 10.7771C0.249996 0.814337 13.2272 -3.02118 18.6432 5.34078L63.4789 74.5637Z" fill="#C4C4C4"/>
+        </svg>
+    </div>
+        
+</html>
+
+
