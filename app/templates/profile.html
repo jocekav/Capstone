@@ -11,6 +11,9 @@
     }
 </script>
 
+{% extends "base.html" %}
+
+{% block content %}
 <!DOCTYPE html>
 <html>
     <style>
@@ -87,10 +90,6 @@
     background: #FFFFFF;
     box-shadow: 0px 0px 8px 6px rgba(31, 30, 33, 0.25);"
     >
-    <!-- <div>
-        <button class="link-button" id='load_spotify' onclick=load_spotify()>Load Spotify Data</button>
-        <button class="link-button" id='reset_pass'>Reset Password</button>
-    </div> -->
         <img src="../static/156f5edb-bf97-484e-9d81-9c88ccf13137.png">
         <form method="POST">
             <!-- {{ form.hidden_tag() }} -->
@@ -120,6 +119,7 @@
             <button class="submit-button" id="submit">Save Profile</button>
         </form>
     </div>
+    {% endblock %}
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script type="text/javascript">
 </script>

@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block content %}
 <html>
     <style>
         /* body {background-color: #D7D9D7;} */
@@ -141,7 +143,14 @@
             position: relative;
             width:66px;
             height:160px;
-            top: -10%;
+            top: 10%;
+            left: 0%;
+        }
+        .next-arrow {
+            position:relative;
+            width:66px;
+            height:400px;
+            top: -25%;
             left: 85%;
         }
         
@@ -159,7 +168,7 @@
             <img src="{{ image_file }}">
         </div>
         <div class = "match-text">
-            <div class = "match-name"><b>Jocelyn Kavanagh</b></div>
+            <div class = "match-name"><b>{{name}}</b></div>
             <div class = "match-score"><b>Match Score: {{ score }}</b></div>
             <div class = "match-info">
                 <!-- "Golden Slumber" by The Beatles</br>
@@ -171,13 +180,16 @@
             <div class = "match-location">Location: {{ location }}</div>
         </div>       
     </div>
-    <form action="/matches" method="post">
-        <div class="arrow">
+    <div class="next-arrow">
+<form action="/matches" method="post" class="arrow">
+    <button>
         <svg width="66" height="160" viewBox="0 0 66 160" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M63.4789 74.5637C65.6212 77.8713 65.6212 82.1287 63.4789 85.4363L18.6432 154.659C13.2272 163.021 0.249996 159.186 0.249996 149.223L0.249996 10.7771C0.249996 0.814337 13.2272 -3.02118 18.6432 5.34078L63.4789 74.5637Z" fill="#C4C4C4"/>
             </svg>
-        </div>
-    </form>
+    </button>
+</form>
+</div>
+{% endblock %}
         
 </html>
 
