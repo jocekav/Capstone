@@ -44,7 +44,8 @@ def login():
 @auth.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'GET':
-        return render_template('signup.html')
+        # return render_template('signup.html')
+        return render_template('index.html')
     if request.method == 'POST':
         email = request.form.get('email')
         name = request.form.get('name')
@@ -60,7 +61,6 @@ def signup():
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for('auth.login'))
-
 
 @auth.route('/logout')
 @login_required
