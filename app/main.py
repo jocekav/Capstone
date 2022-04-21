@@ -12,15 +12,15 @@ import os
 import uuid
 from PIL import Image
 
-main = Blueprint('main', __name__)
+main_bp = Blueprint('main', __name__)
 
 #homepage
-@main.route('/')
+@main_bp.route('/')
 def index():
     return render_template('index.html')
 
 #profile page
-@main.route('/profile', methods=['GET', 'POST'])
+@main_bp.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
     form = UpdateProfileForm()
@@ -57,7 +57,7 @@ def profile():
                            image_file=image_file, form=form, name=current_user.name)
     # return render_template('profile.html', name=current_user.name)
 
-@main.route('/load_spotify_data')
+@main_bp.route('/load_spotify_data')
 def load_spotify_data():
     print('button push')
     token = current_user.token
