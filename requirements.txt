@@ -22,6 +22,7 @@ numpy==1.22.2
 Pillow==8.4.0
 pipenv==2022.1.8
 platformdirs==2.4.1
+psycopg2-binary
 requests==2.26.0
 six==1.16.0
 SQLAlchemy==1.4.25
