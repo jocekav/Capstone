@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, render_template, request, redirect, url_for
 from __init__ import db
-# from __init__ import create_app
+from __init__ import create_app
 from __init__ import app
 from forms import UpdateProfileForm
 from flask_login import login_user, logout_user, login_required, current_user
@@ -88,7 +88,7 @@ def load_spotify_data():
 
 
 #init flask app
-# app = create_app()
+app = create_app()
 
 if __name__ == '__main__':
     #create database when runnning the app
