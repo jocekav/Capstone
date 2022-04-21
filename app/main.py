@@ -91,5 +91,5 @@ app = create_app()
 
 if __name__ == '__main__':
     #create database when runnning the app
-    # db.create_all(app=create_app())
+    db.create_all(app=create_app())
     app.run(debug=True)
