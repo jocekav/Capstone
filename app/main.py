@@ -88,8 +88,10 @@ def load_spotify_data():
 
 #init flask app
 app = create_app()
+db.init_app(app)
 
 if __name__ == '__main__':
     #create database when runnning the app
-    db.create_all(app=create_app())
+    # db.create_all(app=create_app())
+    db.init_app(app=create_app())
     app.run(debug=True)
