@@ -4,6 +4,9 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from flask_login import LoginManager
 
+import os
+import re
+
 # init SQLAlchemy so we can use it later in our models
 db = SQLAlchemy()
 
@@ -12,7 +15,12 @@ def create_app():
 
     app.config.from_object(Config)
 
-    DB_URI = app.config['SQLALCHEMY_DATABASE_URI']
+    # DB_URI = app.config['SQLALCHEMY_DATABASE_URI']
+    # uri = os.getenv("DATABASE_URL")  # or other relevant config var
+    # if uri.startswith("postgres://"):
+    #     uri = uri.replace("postgres://", "postgresql://", 1)
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL?sslmode=require').replace('postgres://', 'postgresql://')
+# rest of connection code using the connection string `uri`
     # db = SQLAlchemy(app)
     # engine = create_engine(DB_URI)
     # app.config['SECRET_KEY'] = 'secret-key-goes-here'
