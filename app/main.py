@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, render_template, request, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
 from __init__ import db
 from __init__ import create_app
 from forms import UpdateProfileForm
@@ -88,6 +89,7 @@ def load_spotify_data():
 
 #init flask app
 app = create_app()
+db = SQLAlchemy(app)
 db.init_app(app)
 
 if __name__ == '__main__':
