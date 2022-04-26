@@ -56,7 +56,7 @@ def signup():
             # flash('Email already exists')
             print('email already exists')
             return redirect(url_for('auth.signup'))
-        new_user = User(id= uuid.uuid4().hex, email=email, name=name,
+        new_user = User(email=email, name=name,
                         password=generate_password_hash(password,
                         method='sha256'), location='blank', preference='blank', age='blank')
         db.session.add(new_user)
