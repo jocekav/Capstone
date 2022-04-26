@@ -1,6 +1,176 @@
-{% extends "base.html" %}
+<style>
+body {
+background: linear-gradient(to top, #D7D9D7 0%, #FFFFFF 73.58%);
+background-repeat: no-repeat;
+background-attachment: fixed;
+margin: 0;
+height: 100vh;
+}
+.circle-container {
+margin: 25px;
+position: relative;
+}
+.pink-circle {
+position: absolute;
+border-radius: 50%; 
+width: 750px;
+height: 750px;
+top: 5%;
+right: -10%;
+background-color: #C60F7B;
+}
+.purple-circle {
+position: absolute;
+border-radius: 50%; 
+width: 750px;
+height: 750px;
+top: 5%;
+left: -10%;
+background-color: #18206F;
+}
+.blue-circle {
+position: absolute;
+border-radius: 50%; 
+width: 750px;
+height: 750px;
+top: 5%;
+left: 25%;
+background-color: #218380;
+}
+.match-text {
+position: absolute;
+font-family: arial, sans-serif;
+font-size: 1.5rem;
+width:80%;
+height:20%;
+left: 10%;
+color: white;
+}
+.match-name {
+position: absolute;
+max-width: 400px;
+margin-top: 40px;
+left:20%;
+top:20%;
+font-size: 2rem;
+}
+iframe
+{
+position: absolute;
+}
+.iframe-container {
+    position:absolute;
+    width:65%;
+    height:20%;
+    left: 17.5%;
+    bottom: 5%;
+}
+.box {
+  display:flex;
+  /* flex-wrap:wrap; */
+  margin:-.5em;
+  position:relative;
+  top: 20%;
+  height:50%;
+}
+.container {
+  background-color: transparent;
+  box-sizing:border-box;
+  flex:0 0 50%;
+  height:100%;
+  margin:.5em;
+  overflow:auto;
+  left: 25%;
+}
+.list {
+  list-style:none;
+  margin:0;
+  padding:0;
+}
 
-{% block content %}
-<h1>Your Shared Playlist with {{name}}</h1>
-<iframe src="{{spotify_uri}}" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-{% endblock %}
+.item {
+  background-color:white;
+  font-family: arial, sans-serif;
+  margin:.25em;
+  padding:.5em;
+}
+
+#songs {
+  overflow: hidden;
+  position: relative;
+}
+#songs .scrollbox {
+  height: 100%;
+  overflow: auto;
+}
+#songs .shadow {
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: all 0.2s ease-out;
+}
+#songs.off-top .shadow-top {
+  box-shadow: 0 1em 1em -1em black inset;
+}
+#songs.off-bottom .shadow-bottom {
+  box-shadow: 0 -1em 1em -1em black inset;
+}
+</style>
+<script>
+    const songs = document.getElementById('songs');
+const songssb = document.querySelector('#songs .scrollbox');
+let songsIsScrolling = false;
+
+function setShadows(event) {
+  if (!songsIsScrolling) {
+    window.requestAnimationFrame(function() {
+      if (event.target.scrollTop > 0) {
+        songs.classList.add('off-top');
+      }
+      else {
+        songs.classList.remove('off-top');
+      }
+      if (event.target.scrollTop < 160) {
+        songs.classList.add('off-bottom');
+      }
+      else {
+        songs.classList.remove('off-bottom');
+      }
+      songsIsScrolling = false;
+    });
+    songsIsScrolling = true;
+  }
+}
+
+songssb.addEventListener('scroll', setShadows);
+</script>
+<html>
+<body>
+    <div class = "pink-circle"></div>
+    <div class = "purple-circle"></div>
+    <div class = "blue-circle">
+        <div class="match-text">
+            <div class="match-name">Your playlist with {{name}}</div>
+        </div>
+        <div class="box">
+            <div id="songs" class="container off-bottom">
+                <div class="scrollbox">
+                    <ul class="list"></ul>
+                    {% for song in song_titles %}
+                    <li class="item">{{ song }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                <div class="shadow shadow-top" aria-hidden="true"></div>
+                <div class="shadow shadow-bottom" aria-hidden="true"></div>
+          </div>
+        </div>
+        <div class="iframe-container">
+            <iframe src="{{spotify_uri}}" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+    </div>
+</body>
+</html>

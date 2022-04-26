@@ -207,3 +207,17 @@ def create_playlist(token, user_id, other_user, song_uris):
     BASE_URL = 'https://api.spotify.com/v1/playlists/'
     response = requests.post(BASE_URL + playlist_id + '/tracks', headers=headers, data=data)
     return playlist_id
+
+def getSongInfo(token, uri):
+    SPOTIFY_URL_TRACK = "https://api.spotify.com/v1/tracks/"
+    header = {'Accept': 'application/json',
+                'Content-Type': 'application/json', 
+                "Authorization": "Bearer {}".format(token)}
+    id = uri.split(':')[2]
+    response = requests.get(SPOTIFY_URL_TRACK+id, headers=header)
+    resp = response.json()
+    art = resp['album']['images'][0]['url']
+    duration = resp['duration_ms']
+    title = resp['name']
+    # return [title, duration, art]
+    return title

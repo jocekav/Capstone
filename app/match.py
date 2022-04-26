@@ -15,12 +15,12 @@ user_count = 0
 def matches():
     global user_count
     users = User.query.all()
-    total_users = len(users)
+    total_users = len(users) - 1
     print(total_users)
     # if request.method == 'GET':
-    user_count = (user_count + 1) % total_users
-    if current_user.id == user_count + 1:
-        user_count = (user_count + 1) % total_users
+    user_count = (user_count) % total_users + 1
+    if current_user.id == user_count:
+        user_count = (user_count) % total_users + 1
     name = users[user_count].name
     location = users[user_count].location
     preference = users[user_count].preference
@@ -60,12 +60,16 @@ def player():
     #     joint_playlist = joint_playlist[:100]
 
     front = 'spotify:track:'
+    song_titles = []
     for i in range(len(joint_playlist)):
         joint_playlist[i] = front + joint_playlist[i]
+        song_titles.append(playlist.getSongInfo(current_user.token, joint_playlist[i]))
 
     playlist_id = playlist.create_playlist(current_user.token, current_user.spotify_id, name, joint_playlist)
     print(playlist_id)
+    print(song_titles)
 
-    spotify_uri = 'https://open.spotify.com/embed/playlist/' + playlist_id + '?utm_source=generator'
-    # return render_template('player.html', token=current_user.token, name=name, user_id=current_user.spotify_id, uris=joint_playlist)
-    return render_template('player.html', spotify_uri=spotify_uri, name=name)
+    spotify_uri = 'https://open.spotify.com/embed/playlist/' + playlist_id + '?utm_source=generator&theme=0'
+    # return render_template('player.html', token=current_user.token, name=name, user_id=current_user.spotify_id, uris=joint_playlist, song_titles=song_titles)
+    # return render_template('player.html', spotify_uri=spotify_uri, name=name)
+    return render_template('player.html', spotify_uri=spotify_uri, name=name, song_titles=song_titles)
