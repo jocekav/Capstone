@@ -5,7 +5,6 @@ from flask_login import login_user, logout_user, login_required, current_user
 from __init__ import db
 from spotifyLogin import getAuth
 
-import uuid
 
 auth = Blueprint('auth', __name__)
 
