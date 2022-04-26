@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+<!-- <!DOCTYPE html>
+<html style="font-size: 16px;">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="​Brand Positioning">
+    <meta name="description" content="">
+    <meta name="page_type" content="np-template-header-footer-from-plugin">
+    <title>Copy of Page 7</title>
+    <link rel="stylesheet" href="match.css" media="screen">
+<link rel="stylesheet" href="Copy-of-Page-7.css" media="screen">
+    <script class="u-script" type="text/javascript" src="jquery-1.9.1.min.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+    <meta name="generator" content="Nicepage 3.29.3, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i|Magra:400,700">
+    
+    
+    <meta name="theme-color" content="#dbdbe9">
+    <meta property="og:title" content="Copy of Page 7">
+    <meta property="og:type" content="website">
+  </head> -->
+{% block content %}
+  <section class="u-align-center u-clearfix u-image u-section-1" id="carousel_0532" data-image-width="1624" data-image-height="1080">
+    <img src="{{ image_file }}">
+    <div class="u-align-left u-clearfix u-sheet u-valign-middle u-sheet-1">
+      <div class="u-align-center u-container-style u-group u-white u-group-1" data-href="https://nicepage.com">
+        <div class="u-container-layout u-valign-middle u-container-layout-1">
+          <div class="u-image u-image-circle u-preserve-proportions u-image-1"data-image-width="598" data-image-height="598"></div>
+          <h2 class="u-custom-font u-font-courier-new u-text u-text-default u-text-1">{{ name }}<br>
+          </h2>
+          <p class="u-text u-text-grey-50 u-text-2">Location: {{ location }} <br> Preference: {{ preference }} <br> Age: {{ age }} <br> Match Score: {{ score }}</p>
+          <!-- <a href="https://nicepage.app" class="u-active-black u-border-none u-btn u-btn-round u-button-style u-hover-black u-palette-3-base u-radius-2 u-text-active-white u-text-hover-white u-btn-2">Next Match</a> -->
+        </div>
+      </div>
+    <form action="/matches" method="post">
+        <button type= "submit" class="button is-block is-info is-large is-fullwidth">Next Match</button>
+    </form>
+    <form action="/player" method="post">
+      <button type= "submit" class="button is-block is-info is-large is-fullwidth">See Playlist</button>
+    </form>
+    <!-- <button href="{{ url_for('match.player')}}" class="button is-block is-info is-large is-fullwidth">See Playlist</button> -->
+    </div>
+  </section>
+{% endblock %}

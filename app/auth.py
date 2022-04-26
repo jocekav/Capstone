@@ -5,6 +5,8 @@ from flask_login import login_user, logout_user, login_required, current_user
 from __init__ import db
 from spotifyLogin import getAuth
 
+import uuid
+
 auth = Blueprint('auth', __name__)
 
 @auth.route("/callback/")
@@ -54,7 +56,7 @@ def signup():
             # flash('Email already exists')
             print('email already exists')
             return redirect(url_for('auth.signup'))
-        new_user = User(email=email, name=name,
+        new_user = User(id= uuid.uuid4().hex, email=email, name=name,
                         password=generate_password_hash(password,
                         method='sha256'), location='blank', preference='blank', age='blank')
         db.session.add(new_user)

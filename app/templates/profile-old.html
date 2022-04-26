@@ -1,0 +1,126 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+    function load_spotify() {
+        console.log("button click")
+        $.getJSON('/load_spotify_data',
+          function(data) {
+              alert(data.status)
+        });
+        console.log("recieved")
+    }
+
+
+    // document.getElementById('load_spotify').onclick = function() {
+    //     console.log('loading spotify');
+    //     load_spotify()
+    //     console.log('spotify data recieved');
+    // };
+
+// $(function() {
+//     $('#load_spotify').bind('click', function() {
+//         $.getJSON('/load_spotify_data',
+//           function() {
+//       });
+// })
+// });
+
+</script>
+
+
+{% extends "base.html" %}
+{% block content %}
+<div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ image_file }}">
+        <div class="media-body">
+          <h2 class="account-heading">{{ name }}</h2>
+        </div>
+      </div>
+        <form method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Account Info</legend>
+                <div class="form-group">
+                    {{ form.location.label(class="form-control-label") }}
+
+                    {% if form.location.errors %}
+                        {{ form.location(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.location.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.location(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.preference.label(class="form-control-label") }}
+                    {% if form.preference.errors %}
+                        {{ form.preference(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.preference.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.preference(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.age.label(class="form-control-label") }}
+                    {% if form.age.errors %}
+                        {{ form.age(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.age.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.age(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.picture.label() }}
+                    {{ form.picture(class="form-control-file") }}
+                    {% if form.picture.errors %}
+                        {% for error in form.picture.errors %}
+                            <span class="text-danger">{{ error }}</span></br>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+        <button type=button id='load_spotify' onclick=load_spotify()>Load Spotify Data</button>
+    </div>
+{% endblock content %}
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+    // function load_spotify() {
+    //     console.log("button click")
+    //     $.getJSON('/load_spotify_data',
+    //       function() {
+    //     });
+    // }
+
+    // document.getElementById('load_spotify').onclick = function() {
+    //     console.log('loading spotify');
+    //     load_spotify()
+    //     console.log('spotify data recieved');
+    // };
+
+// $(function() {
+//     $('#load_spotify').bind('click', function() {
+//         $.getJSON('/load_spotify_data',
+//           function() {
+//       });
+// })
+// });
+
+</script>
