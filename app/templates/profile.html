@@ -60,7 +60,7 @@
             display: inline;
             top: 50%;
             left: 50%;
-            transform:translate(100%,70%);
+            transform:translate(140%,70%);
         } 
         .submit-button {
             background-color: #218380;
@@ -71,7 +71,7 @@
             min-width: 150px;
             min-height: 60px;
             display: block;
-            margin: 10% 48%;
+            margin: 5% 48%;
         }
         img {
             transform:translate(-50%,-50%);
@@ -95,28 +95,77 @@
             <!-- {{ form.hidden_tag() }} -->
                 <div class="field">
                     <div class="control">
-                        <label location> Location
-                        <input class="input is-large" type="text" name="location" placeholder="Atlanta, GA">
+                        <label location>
+                        <!-- <input class="input is-large" type="text" name="location" placeholder="Atlanta, GA"> -->
+                        {{ form.location.label(class="form-control-label") }}
+
+                        {% if form.location.errors %}
+                            {{ form.location(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.location.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.location(class="form-control form-control-lg") }}
+                        {% endif %}
                         </label>
                     </div>
                 </div>
                 <div class="field">
                     <div class="control">
-                        <label location> Age
-                        <input class="input is-large" type="text" name="age" placeholder="{{age}}">
-                        </label>
+                        <label location>
+                        <!-- <input class="input is-large" type="text" name="age" placeholder="{{age}}"> -->
+                        {{ form.preference.label(class="form-control-label") }}
+                        {% if form.preference.errors %}
+                            {{ form.preference(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.preference.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.preference(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </label>
                     </div>
                 </div>
                 <div class="field">
                     <div class="control">
-                        <label preference> Preference
-                        <input class="input is-large" type="text" name="preference" placeholder="{{preference}}">
+                        <label preference>
+                        <!-- <input class="input is-large" type="text" name="preference" placeholder="{{preference}}"> -->
+                        {{ form.age.label(class="form-control-label") }}
+                        {% if form.age.errors %}
+                            {{ form.age(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.age.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.age(class="form-control form-control-lg") }}
+                        {% endif %}
                         </label>
                     </div>
                 </div>
-            <button class="link-button" id='load_spotify' onclick=load_spotify()>Load Spotify Data</button>
-            <button class="link-button" id='update_pic' onclick=load_spotify()>Update Picture</button>
-            <button class="submit-button" id="submit">Save Profile</button>
+                <div class="field">
+                    <label image>
+                    {{ form.picture.label() }}
+                    {{ form.picture(class="form-control-file") }}
+                    {% if form.picture.errors %}
+                        {% for error in form.picture.errors %}
+                            <span class="text-danger">{{ error }}</span></br>
+                        {% endfor %}
+                    {% endif %}
+                </label>
+                </div>
+            <!-- <button class="link-button" id='load_spotify' onclick=load_spotify()>Load Spotify Data</button> -->
+            <button class="link-button" id='load_spotify'>Load Spotify Data</button>
+            <!-- <button class="link-button" id='update_pic' onclick=>Update Picture</button> -->
+            <!-- <button class="submit-button" id="submit">Save Profile</button> -->
+            <div class="form-group">
+                {{ form.submit(class="submit-button") }}
+            </div>
         </form>
     </div>
     {% endblock %}
