@@ -3,11 +3,13 @@ from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from flask_login import LoginManager
+from flask_migrate import Migrate
 
 import os
 import re
 
-# init SQLAlchemy so we can use it later in our models
+# init SQLAlchemy so we can use it later in our modelss
+global db
 db = SQLAlchemy()
 
 def create_app():
@@ -15,6 +17,12 @@ def create_app():
     app = Flask(__name__)
 
     app.config.from_object(Config)
+
+    global db
+    db = SQLAlchemy(app)
+    db.init_app(app)
+
+    migrate = Migrate(app, db)
 
     DB_URI = app.config['SQLALCHEMY_DATABASE_URI']
 

@@ -3,8 +3,8 @@ import json
 from flask import Blueprint, render_template, request, redirect, url_for
 
 ##server side
-CLIENT_ID = "64d88f30bd6e47d5a99e11985fdd0bdb"
-CLIENT_SECRET = "aa57afecfba4466bb0caeae430352b4c"
+CLIENT_ID = "374000479f0d47348edf19d25d8fe52c"
+CLIENT_SECRET = "83cd59ea8f2949ddb6860e216f707319"
 PORT = "5000"
 CLIENT_URL = "http://127.0.0.1"
 REDIRECT_URI = "{}:{}/profile".format(CLIENT_URL, PORT)
