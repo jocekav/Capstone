@@ -2,7 +2,8 @@ from flask import Blueprint, jsonify, render_template, request, redirect, url_fo
 from flask_sqlalchemy import SQLAlchemy
 # from __init__ import db
 # from __init__ import create_app
-from app.app import app, db
+# from app import app, db
+from app.app import create_app, db
 from forms import UpdateProfileForm
 from flask_login import login_user, logout_user, login_required, current_user
 # import spotifyLogin
@@ -91,12 +92,12 @@ def load_spotify_data():
 
 
 #init flask app
-# app = create_app()
-# db = SQLAlchemy(app)
-# db.init_app(app)
+app = create_app()
+db = SQLAlchemy(app)
+db.init_app(app)
 
 if __name__ == '__main__':
     #create database when runnning the app
     # db.create_all(app=create_app())
-    # db.init_app(app)
+    db.init_app(app)
     app.run(debug=True)
