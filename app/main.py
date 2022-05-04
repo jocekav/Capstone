@@ -2,11 +2,13 @@ from flask import Blueprint, jsonify, render_template, request, redirect, url_fo
 from flask_sqlalchemy import SQLAlchemy
 # from __init__ import db
 # from __init__ import create_app
-from __init__ import app, db
-from forms import UpdateProfileForm
+from .app import app, db
+from .forms import UpdateProfileForm
 from flask_login import login_user, logout_user, login_required, current_user
-import spotifyLogin
-import playlist
+# import spotifyLogin
+from .spotifyLogin import getAccessToken, getAuth, getUserID, getUserToken
+# import playlist
+from .playlist import getArtistGenre,  getArtistInLists,  getPlaylists, getSongInLists
 import numpy as np
 
 import os
@@ -26,10 +28,10 @@ def index():
 def profile():
     form = UpdateProfileForm()
     if 'code' in request.args:
-            userToken = spotifyLogin.getUserToken(request.args['code'])
+            userToken = getUserToken(request.args['code'])
             token = userToken[0]
             current_user.token = token
-            spotify_id = spotifyLogin.getUserID(token)
+            spotify_id = getUserID(token)
             current_user.spotify_id = spotify_id
             db.session.commit()
     if form.validate_on_submit():
@@ -63,10 +65,10 @@ def load_spotify_data():
     print('button push')
     token = current_user.token
     user_id = current_user.spotify_id
-    playlists = playlist.getPlaylists(user_id, token)
-    songs = playlist.getSongInLists(playlists, token)
-    artists = playlist.getArtistInLists(playlists, token)
-    genres = playlist.getArtistGenre(artists, token)
+    playlists = getPlaylists(user_id, token)
+    songs = getSongInLists(playlists, token)
+    artists = getArtistInLists(playlists, token)
+    genres = getArtistGenre(artists, token)
 
     path = os.path.join(app.root_path, 'txt/')
     playlist_fn = str(uuid.uuid4()) + '_playlists.txt'

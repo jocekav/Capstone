@@ -1,5 +1,5 @@
 from flask_login import UserMixin
-from __init__ import db
+from .app import db
 
 USER_ID = db.Sequence('table_id_seq', start=0)
 

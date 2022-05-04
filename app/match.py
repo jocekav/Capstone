@@ -1,11 +1,12 @@
 from posixpath import join
 from flask import Blueprint, render_template, request, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
-from models import User
+from .models import User
 from flask_login import login_user, logout_user, login_required, current_user
-from __init__ import db
+from .app import db
 
-import playlist
+# import playlist
+from .playlist import matchsummary, jointPlaylist, jointPlaylistV1, jointPlaylistV2, jointPlaylistV3, create_playlist
 
 match = Blueprint('match', __name__)
 global user_count
@@ -36,7 +37,7 @@ def matches():
     user2_artistfile = 'txt/' + users[user_count].artists
     user2_genrefile = 'txt/' + users[user_count].genres
 
-    match_score = playlist.matchsummary(user1_songfile, user2_songfile, user1_artistfile, user2_artistfile, user1_genrefile, user2_genrefile)
+    match_score = matchsummary(user1_songfile, user2_songfile, user1_artistfile, user2_artistfile, user1_genrefile, user2_genrefile)
     print(match_score)
     match_score = round(match_score * 100)
     print(user_count)
@@ -54,7 +55,7 @@ def player():
     user2_songfile = 'txt/' + users[user_count].songs
     user2_artistfile = 'txt/' + users[user_count].artists
 
-    joint_playlist = playlist.jointPlaylistV2(user1_songfile, user2_songfile, user1_artistfile, user2_artistfile)
+    joint_playlist = jointPlaylistV2(user1_songfile, user2_songfile, user1_artistfile, user2_artistfile)
 
     # if len(joint_playlist) >= 100:
     #     joint_playlist = joint_playlist[:100]
@@ -63,7 +64,7 @@ def player():
     for i in range(len(joint_playlist)):
         joint_playlist[i] = front + joint_playlist[i]
 
-    playlist_id = playlist.create_playlist(current_user.token, current_user.spotify_id, name, joint_playlist)
+    playlist_id = create_playlist(current_user.token, current_user.spotify_id, name, joint_playlist)
     print(playlist_id)
 
     spotify_uri = 'https://open.spotify.com/embed/playlist/' + playlist_id + '?utm_source=generator'
