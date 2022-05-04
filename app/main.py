@@ -3,12 +3,12 @@ from flask_sqlalchemy import SQLAlchemy
 # from __init__ import db
 # from __init__ import create_app
 from app.app import app, db
-from app.forms import UpdateProfileForm
+from forms import UpdateProfileForm
 from flask_login import login_user, logout_user, login_required, current_user
 # import spotifyLogin
-from app.spotifyLogin import getAccessToken, getAuth, getUserID, getUserToken
+from spotifyLogin import getAccessToken, getAuth, getUserID, getUserToken
 # import playlist
-from app.playlist import getArtistGenre,  getArtistInLists,  getPlaylists, getSongInLists
+from playlist import getArtistGenre,  getArtistInLists,  getPlaylists, getSongInLists
 import numpy as np
 
 import os

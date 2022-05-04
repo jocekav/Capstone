@@ -32,7 +32,7 @@ login_manager.login_view = 'auth.login' # define the redirection
                         # to access without being logged in
 login_manager.init_app(app) # configure it for login
 
-from app.models import User
+from models import User
 @login_manager.user_loader
 def load_user(user_id): #reload user object from the user ID 
                         #stored in the session
@@ -41,14 +41,14 @@ def load_user(user_id): #reload user object from the user ID
     return User.query.get(int(user_id))
 
 # blueprint for auth routes in our app
-from app.auth import auth as auth_blueprint
+from auth import auth as auth_blueprint
 app.register_blueprint(auth_blueprint)
 
 # blueprint for non-auth parts of app
-from app.main import main_bp as main_blueprint
+from main import main_bp as main_blueprint
 app.register_blueprint(main_blueprint)
 
-from app.match import match as match_blueprint
+from match import match as match_blueprint
 app.register_blueprint(match_blueprint)
 
 db = SQLAlchemy(app)
