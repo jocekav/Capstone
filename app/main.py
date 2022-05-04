@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 # from __init__ import db
 # from __init__ import create_app
 # from app import app, db
-from app.app import create_app, db
+from init_app import create_app, db
 from forms import UpdateProfileForm
 from flask_login import login_user, logout_user, login_required, current_user
 # import spotifyLogin
