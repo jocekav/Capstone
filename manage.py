@@ -6,7 +6,7 @@ from flask_migrate import Migrate, MigrateCommand
 from app.main import app
 from app import db
 
-migrate = Migrate(app, app.db)
+migrate = Migrate(app, db)
 
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
