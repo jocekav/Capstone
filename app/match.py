@@ -1,9 +1,9 @@
 from posixpath import join
 from flask import Blueprint, render_template, request, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
-from .models import User
+from app.models import User
 from flask_login import login_user, logout_user, login_required, current_user
-from .app import db
+from app.app import db
 
 # import playlist
 from .playlist import matchsummary, jointPlaylist, jointPlaylistV1, jointPlaylistV2, jointPlaylistV3, create_playlist

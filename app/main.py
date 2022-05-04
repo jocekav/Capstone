@@ -2,13 +2,13 @@ from flask import Blueprint, jsonify, render_template, request, redirect, url_fo
 from flask_sqlalchemy import SQLAlchemy
 # from __init__ import db
 # from __init__ import create_app
-from .app import app, db
-from .forms import UpdateProfileForm
+from app.app import app, db
+from app.forms import UpdateProfileForm
 from flask_login import login_user, logout_user, login_required, current_user
 # import spotifyLogin
-from .spotifyLogin import getAccessToken, getAuth, getUserID, getUserToken
+from app.spotifyLogin import getAccessToken, getAuth, getUserID, getUserToken
 # import playlist
-from .playlist import getArtistGenre,  getArtistInLists,  getPlaylists, getSongInLists
+from app.playlist import getArtistGenre,  getArtistInLists,  getPlaylists, getSongInLists
 import numpy as np
 
 import os
