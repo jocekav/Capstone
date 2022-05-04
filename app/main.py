@@ -1,7 +1,9 @@
 from flask import Blueprint, jsonify, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
-from __init__ import db
-from __init__ import create_app
+# from __init__ import db
+# from __init__ import create_app
+from app import db
+from app import create_app
 from forms import UpdateProfileForm
 from flask_login import login_user, logout_user, login_required, current_user
 import spotifyLogin
